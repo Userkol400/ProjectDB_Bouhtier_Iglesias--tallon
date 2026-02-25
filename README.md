@@ -37,29 +37,53 @@ Raw Data Dictionary :
 
 
 Meaning of the Data	Type	Size (Chars/Digits)
+
 Driver Permanent Number	Numeric	2
+
 Driver First Name	Alphanumeric	30
+
 Driver Last Name	Alphanumeric	30
+
 Driver Nationality	Alphanumeric	20
+
 Driver Date of Birth	Date	10
+
 Total Career Podiums	Numeric	3
+
 Chassis Serial Number	Alphanumeric	10
+
 Power Unit (PU) ID	Alphanumeric	15
+
 PU Current Mileage (km)	Numeric	6
+
 PU Maximum RPM	Numeric	5
+
 Circuit Name	Alphanumeric	50
+
 Circuit Location (Country)	Alphanumeric	30
+
 Circuit Length (meters)	Numeric	5
+
 Grand Prix Name	Alphanumeric	50
+
 Grand Prix Date	Date	10
+
 Total Race Laps	Numeric	2
+
 Session Type (e.g., FP1, Q3, Race)	Alphanumeric	15
+
 Telemetry Timestamp	Time/Long	15
+
 Car Speed (km/h)	Numeric	3
+
 Engine RPM	Numeric	5
+
 Current Fuel Level (kg)	Numeric	3
+
 Gear Selected	Numeric	1
+
 Pit Stop Lap Number	Numeric	2
+
 Pit Stop Stationary Duration (sec)	Numeric (Decimal)	5
 Total Pit Lane Duration (sec)	Numeric (Decimal)	6
 Tires Fitted (e.g., Soft, Medium, Hard)	Alphanumeric	10
