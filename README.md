@@ -85,12 +85,19 @@ Gear Selected	Numeric	1
 Pit Stop Lap Number	Numeric	2
 
 Pit Stop Stationary Duration (sec)	Numeric (Decimal)	5
+
 Total Pit Lane Duration (sec)	Numeric (Decimal)	6
+
 Tires Fitted (e.g., Soft, Medium, Hard)	Alphanumeric	10
+
 Race Finishing Position	Numeric	2
+
 Championship Points Earned	Numeric	2
+
 Fastest Lap Time (mm:ss.ms)	Alphanumeric	10
+
 Status (e.g., Finished, DNF, DSQ)	Alphanumeric	15
+
 Constructor Name	Alphanumeric	40
 
 
