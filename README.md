@@ -105,11 +105,9 @@ Constructor Name	Alphanumeric	40
 
 Advanced Modeling Elements :
 
-In accordance with the instructions, this model includes the following advanced elements:
+n-ary relationship (n>2): The RESULT association is a valid n-ary relationship because it simultaneously connects three distinct entities: DRIVER, CONSTRUCTOR, and GRAND_PRIX. This structure is essential for centralizing race outcome data—such as finishing position, points earned, and lap times—for a specific driver within a specific team during a single event.
 
-n-ary relationship (n>2): The Result relationship links the Driver entity, the Car (or Constructor) entity, and the Grand Prix entity.
-
-Weak entity / Strong entity: The Pit Stop entity is a weak entity whose existence depends on the Race strong entity
+Relative Identification (Weak/Strong Entities): The PIT_STOP and TELEMETRY_SESSION entities are modeled as weak entities using relative identification (1,1)(R). These entities do not possess a globally unique identifier and are structurally dependent on their relationships with strong entities (GRAND_PRIX and CAR) to be uniquely identified within the system.
 
 image MCD looping : 
 <img width="1573" height="700" alt="image" src="https://github.com/user-attachments/assets/354b9d0f-9ba0-429b-8975-6e5ceb6ac75c" />
