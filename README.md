@@ -111,7 +111,6 @@ n-ary relationship (n>2): The Result relationship links the Driver entity, the C
 
 Weak entity / Strong entity: The Pit Stop entity is a weak entity whose existence depends on the Race strong entity
 
-
 image MCD looping : 
 <img width="1573" height="700" alt="image" src="https://github.com/user-attachments/assets/354b9d0f-9ba0-429b-8975-6e5ceb6ac75c" />
 
