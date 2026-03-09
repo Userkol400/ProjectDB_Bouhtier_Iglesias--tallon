@@ -220,13 +220,21 @@ Primary keys correspond to IDs, unless otherwise specified. Foreign keys are ide
 Foreign keys must refer to existing primary keys: provide the insert statements in the correct order (first the tables without foreign keys, then the tables in which the foreign keys refer to primary keys in tables that have already been filled in).
 
 CONSTRUCTOR: 11 rows (the 11 official F1 constructors).
+
 DRIVER: 22 rows (the 22 official starting drivers).
+
 CIRCUIT: 24 rows (24 well-known circuits).
+
 GRAND_PRIX: 24 rows (1 per circuit).
+
 POWER_UNIT: 22 rows.
+
 CAR: 22 rows (2 cars per constructor).
+
 RESULT: 528 rows (the 22 drivers participating in the 24 Grands Prix).
+
 PIT_STOP: 50 rows (several pit stops distributed across the races).
+
 TELEMETRY_SESSION: 50 rows (various speed/RPM readings during the races).
 
 The data must be realistic (using real F1 drivers, teams, and circuits) and must comply with the following validation constraints:
