@@ -284,5 +284,6 @@ CHECK (Total_Pit_Lane_Duration > Pit_Stop_Stationary_Duration);
 Provide the set in the form of an SQL script ready to be executed and saved as 3_insertion.sql
 
 
-Step V : usage scenario : 
+Step V : usage scenario :
+
 The main user of this database is the team's Race Strategist. Their goal is to analyze historical and telemetry data to optimize performance for upcoming Grands Prix. They need to extract the following information: the reliability of our Power Units, the efficiency of our pit stops compared to competitors, the top speeds reached during different sessions, and the overall standings of our drivers. This data will allow them to make crucial decision.
