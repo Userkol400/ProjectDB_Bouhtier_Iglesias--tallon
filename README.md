@@ -114,8 +114,16 @@ image MCD looping :
 
 
 
-Image LDM looping : 
-<img width="1717" height="759" alt="image" src="https://github.com/user-attachments/assets/d538a16c-9e7d-4782-bf53-6f155d0bf73d" />
+LDM from looping : 
+DRIVER = (Permanent_Number VARCHAR(50), First_Name VARCHAR(50), Last_Name VARCHAR(50), Nationality VARCHAR(50), Date_of_Birth VARCHAR(50), Total_Career_Podiums VARCHAR(50));
+CONSTRUCTOR = (Constructor_Name VARCHAR(50));
+CIRCUIT = (Circuit_Name VARCHAR(50), Circuit_Location VARCHAR(50), Circuit_Length VARCHAR(50));
+GRAND_PRIX = (GP_Name VARCHAR(50), GP_Date VARCHAR(50), Total_Race_Laps VARCHAR(50), #Circuit_Name);
+POWER_UNIT = (PU_ID VARCHAR(50), PU_Current_Mileage VARCHAR(50), PU_Maximum_RPM VARCHAR(50));
+CAR = (#Constructor_Name, Chassis_Serial_Number VARCHAR(50), #PU_ID);
+PIT_STOP = (#(#Constructor_Name, Chassis_Serial_Number), #GP_Name, Pit_Stop_Lap_Number VARCHAR(50), Pit_Stop_Stationary_Duration VARCHAR(50), Total_Pit_Lane_Duration VARCHAR(50), Tires_Fitted VARCHAR(50));
+TELEMETRY_SESSION = (#GP_Name, #(#Constructor_Name, Chassis_Serial_Number), Session_Type VARCHAR(50), Telemetry_Timestamp VARCHAR(50), Car_Speed VARCHAR(50), Engine_RPM VARCHAR(50), Current_Fuel_Level VARCHAR(50), Gear_Selected VARCHAR(50));
+RESULT_ = (#Permanent_Number, #Constructor_Name, #GP_Name, Race_Finishing_Position VARCHAR(50), Championship_Points_Earned VARCHAR(50), Fastest_Lap_Time VARCHAR(50), Status VARCHAR(50));
 
 
 Prompt Fourth Step :
