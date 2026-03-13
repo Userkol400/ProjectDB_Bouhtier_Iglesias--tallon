@@ -1,43 +1,31 @@
 
-ALTER TABLE RESULT 
-ADD CONSTRAINT chk_fastest_lap_format 
-CHECK (Fastest_Lap_Time LIKE '_:__.__' OR Fastest_Lap_Time LIKE '__:__.__');
+ALTER TABLE DRIVER
+    ADD CONSTRAINT chk_driver_podiums CHECK (Total_Career_Podiums >= 0),
+    ADD CONSTRAINT chk_driver_number CHECK (Permanent_Number > 0);
 
-ALTER TABLE TELEMETRY_SESSION 
-ADD CONSTRAINT chk_session_type 
-CHECK (Session_Type IN ('FP1', 'FP2', 'FP3', 'Q1', 'Q2', 'Q3', 'Sprint', 'Race'));
-
--
-ALTER TABLE PIT_STOP 
-ADD CONSTRAINT chk_tires_fitted 
-CHECK (Tires_Fitted IN ('Soft', 'Medium', 'Hard', 'Intermediate', 'Wet'));
+ALTER TABLE CIRCUIT
+    ADD CONSTRAINT chk_circuit_length CHECK (Circuit_Length > 0);
 
 
-ALTER TABLE RESULT 
-ADD CONSTRAINT chk_race_status 
-CHECK (Status IN ('Finished', 'DNF', 'DSQ', 'DNS'));
+ALTER TABLE GRAND_PRIX
+    ADD CONSTRAINT chk_gp_laps CHECK (Total_Race_Laps > 0);
 
 
-ALTER TABLE DRIVER 
-ADD CONSTRAINT chk_driver_number 
-CHECK (Permanent_Number BETWEEN 1 AND 99);
+ALTER TABLE POWER_UNIT
+    ADD CONSTRAINT chk_pu_mileage CHECK (PU_Current_Mileage >= 0),
+    ADD CONSTRAINT chk_pu_rpm CHECK (PU_Maximum_RPM > 0 AND PU_Maximum_RPM <= 15000);
 
-ALTER TABLE TELEMETRY_SESSION 
-ADD CONSTRAINT chk_gear_selected 
-CHECK (Gear_Selected BETWEEN 0 AND 8);
+ALTER TABLE PIT_STOP
+    ADD CONSTRAINT chk_pit_durations CHECK (Total_Pit_Lane_Duration >= Pit_Stop_Stationary_Duration),
+    ADD CONSTRAINT chk_tires_fitted CHECK (Tires_Fitted IN ('Soft', 'Medium', 'Hard', 'Intermediate', 'Wet')),
+    ADD CONSTRAINT chk_lap_number CHECK (Pit_Stop_Lap_Number > 0);
 
-ALTER TABLE RESULT 
-ADD CONSTRAINT chk_positive_points 
-CHECK (Championship_Points_Earned >= 0);
 
-ALTER TABLE DRIVER 
-ADD CONSTRAINT chk_positive_podiums 
-CHECK (Total_Career_Podiums >= 0);
+ALTER TABLE TELEMETRY_SESSION
+    ADD CONSTRAINT chk_gear CHECK (Gear_Selected BETWEEN -1 AND 8), -- -1 pour Reverse, 0 pour Neutral, 1-8 pour les vitesses
+    ADD CONSTRAINT chk_car_speed CHECK (Car_Speed >= 0);
 
-ALTER TABLE POWER_UNIT 
-ADD CONSTRAINT chk_positive_mileage 
-CHECK (PU_Current_Mileage >= 0);
 
-ALTER TABLE PIT_STOP 
-ADD CONSTRAINT chk_pit_stop_logic 
-CHECK (Total_Pit_Lane_Duration > Pit_Stop_Stationary_Duration);
+ALTER TABLE RESULT_
+    ADD CONSTRAINT chk_points CHECK (Championship_Points_Earned >= 0),
+    ADD CONSTRAINT chk_finishing_pos CHECK (Race_Finishing_Position > 0);
