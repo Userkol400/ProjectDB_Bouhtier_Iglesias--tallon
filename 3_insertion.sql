@@ -1,22 +1,17 @@
--- ==============================================================================
--- 1. TABLES SANS CLÉS ÉTRANGÈRES (Niveau 0)
--- ==============================================================================
-
--- 1.1 Insertion dans CONSTRUCTOR (11 lignes)
+-- 1. CONSTRUCTOR (10 rows)
 INSERT INTO CONSTRUCTOR (Constructor_Name) VALUES
-('Red Bull Racing'), ('Mercedes'), ('Ferrari'), ('McLaren'), 
-('Aston Martin'), ('Alpine'), ('Williams'), ('RB'), 
-('Kick Sauber'), ('Haas'), ('Andretti Global');
+('Ferrari'), ('Mercedes'), ('Red Bull'), ('McLaren'), ('Aston Martin'),
+('Alpine'), ('Williams'), ('RB'), ('Sauber'), ('Haas');
 
--- 1.2 Insertion dans DRIVER (22 lignes)
+-- 2. DRIVER (20 rows)
 INSERT INTO DRIVER (Permanent_Number, First_Name, Last_Name, Nationality, Date_of_Birth, Total_Career_Podiums) VALUES
-(1, 'Max', 'Verstappen', 'Dutch', '1997-09-30', 98),
+(1, 'Max', 'Verstappen', 'Dutch', '1997-09-30', 100),
 (11, 'Sergio', 'Perez', 'Mexican', '1990-01-26', 35),
 (44, 'Lewis', 'Hamilton', 'British', '1985-01-07', 197),
 (63, 'George', 'Russell', 'British', '1998-02-15', 11),
 (16, 'Charles', 'Leclerc', 'Monegasque', '1997-10-16', 30),
-(55, 'Carlos', 'Sainz', 'Spanish', '1994-09-01', 18),
-(4, 'Lando', 'Norris', 'British', '1999-11-13', 13),
+(55, 'Carlos', 'Sainz', 'Spanish', '1994-09-01', 20),
+(4, 'Lando', 'Norris', 'British', '1999-11-13', 14),
 (81, 'Oscar', 'Piastri', 'Australian', '2001-04-06', 2),
 (14, 'Fernando', 'Alonso', 'Spanish', '1981-07-29', 106),
 (18, 'Lance', 'Stroll', 'Canadian', '1998-10-29', 3),
@@ -24,343 +19,269 @@ INSERT INTO DRIVER (Permanent_Number, First_Name, Last_Name, Nationality, Date_o
 (31, 'Esteban', 'Ocon', 'French', '1996-09-17', 3),
 (23, 'Alexander', 'Albon', 'Thai', '1996-03-23', 2),
 (2, 'Logan', 'Sargeant', 'American', '2000-12-31', 0),
-(22, 'Yuki', 'Tsunoda', 'Japanese', '2000-05-11', 0),
 (3, 'Daniel', 'Ricciardo', 'Australian', '1989-07-01', 32),
+(22, 'Yuki', 'Tsunoda', 'Japanese', '2000-05-11', 0),
 (77, 'Valtteri', 'Bottas', 'Finnish', '1989-08-28', 67),
 (24, 'Zhou', 'Guanyu', 'Chinese', '1999-05-30', 0),
 (27, 'Nico', 'Hulkenberg', 'German', '1987-08-19', 0),
-(20, 'Kevin', 'Magnussen', 'Danish', '1992-10-05', 1),
-(26, 'Colton', 'Herta', 'American', '2000-03-30', 0),
-(28, 'Romain', 'Grosjean', 'French', '1986-04-17', 10);
+(20, 'Kevin', 'Magnussen', 'Danish', '1992-10-05', 1);
 
--- 1.3 Insertion dans CIRCUIT (24 lignes)
+-- 3. CIRCUIT (10 rows)
 INSERT INTO CIRCUIT (Circuit_Name, Circuit_Location, Circuit_Length) VALUES
-('Bahrain International Circuit', 'Bahrain', 5.412),
-('Jeddah Corniche Circuit', 'Saudi Arabia', 6.174),
-('Albert Park Circuit', 'Australia', 5.278),
-('Suzuka International Racing Course', 'Japan', 5.807),
-('Shanghai International Circuit', 'China', 5.451),
-('Miami International Autodrome', 'USA', 5.412),
-('Autodromo Enzo e Dino Ferrari', 'Italy', 4.909),
-('Circuit de Monaco', 'Monaco', 3.337),
-('Circuit Gilles-Villeneuve', 'Canada', 4.361),
-('Circuit de Barcelona-Catalunya', 'Spain', 4.657),
-('Red Bull Ring', 'Austria', 4.318),
-('Silverstone Circuit', 'UK', 5.891),
-('Hungaroring', 'Hungary', 4.381),
-('Circuit de Spa-Francorchamps', 'Belgium', 7.004),
-('Circuit Zandvoort', 'Netherlands', 4.259),
-('Autodromo Nazionale Monza', 'Italy', 5.793),
-('Baku City Circuit', 'Azerbaijan', 6.003),
-('Marina Bay Street Circuit', 'Singapore', 4.940),
-('Circuit of the Americas', 'USA', 5.513),
-('Autodromo Hermanos Rodriguez', 'Mexico', 4.304),
-('Autodromo Jose Carlos Pace', 'Brazil', 4.309),
-('Las Vegas Strip Circuit', 'USA', 6.201),
-('Lusail International Circuit', 'Qatar', 5.419),
-('Yas Marina Circuit', 'UAE', 5.281);
+('Albert Park', 'Melbourne', 5.278),
+('Suzuka International Racing Course', 'Suzuka', 5.807),
+('Shanghai International Circuit', 'Shanghai', 5.451),
+('Miami International Autodrome', 'Miami', 5.412),
+('Circuit de Monaco', 'Monte Carlo', 3.337),
+('Circuit Gilles Villeneuve', 'Montreal', 4.361),
+('Circuit de Barcelona-Catalunya', 'Barcelona', 4.657),
+('Red Bull Ring', 'Spielberg', 4.318),
+('Silverstone Circuit', 'Silverstone', 5.891),
+('Hungaroring', 'Budapest', 4.381);
 
--- 1.4 Insertion dans POWER_UNIT (22 lignes)
+-- 4. POWER_UNIT (30 rows)
+-- Generating 30 PUs with varying mileage and RPM (max 15000)
 INSERT INTO POWER_UNIT (PU_ID, PU_Current_Mileage, PU_Maximum_RPM) VALUES
-('PU-RBPT-01', 500.50, 15000), ('PU-RBPT-02', 450.25, 15000),
-('PU-MERC-01', 600.00, 15000), ('PU-MERC-02', 580.00, 15000),
-('PU-FERR-01', 400.10, 15000), ('PU-FERR-02', 410.20, 15000),
-('PU-MERC-03', 700.50, 15000), ('PU-MERC-04', 710.00, 15000),
-('PU-MERC-05', 300.00, 15000), ('PU-MERC-06', 310.50, 15000),
-('PU-REN-01', 800.00, 15000),  ('PU-REN-02', 820.50, 15000),
-('PU-MERC-07', 450.00, 15000), ('PU-MERC-08', 460.00, 15000),
-('PU-RBPT-03', 350.00, 15000), ('PU-RBPT-04', 360.50, 15000),
-('PU-FERR-03', 900.00, 15000), ('PU-FERR-04', 910.00, 15000),
-('PU-FERR-05', 200.00, 15000), ('PU-FERR-06', 210.00, 15000),
-('PU-REN-03', 100.00, 15000),  ('PU-REN-04', 150.00, 15000);
+(101, 1200.5, 14850), (102, 850.2, 14900), (103, 2100.0, 14700), (104, 300.5, 15000), (105, 50.0, 14950),
+(201, 1100.3, 14800), (202, 900.7, 14850), (203, 1800.2, 14750), (204, 400.1, 14900), (205, 10.0, 15000),
+(301, 1300.9, 14820), (302, 700.4, 14880), (303, 2500.5, 14600), (304, 150.8, 14950), (305, 5.0, 15000),
+(401, 950.0, 14800), (402, 1050.2, 14800), (403, 1200.0, 14700), (404, 200.0, 14900), (405, 20.0, 15000),
+(501, 1150.0, 14850), (502, 880.0, 14900), (503, 1900.0, 14750), (504, 350.0, 15000), (505, 15.0, 14950),
+(601, 1000.0, 14800), (602, 500.0, 14900), (603, 2200.0, 14650), (604, 100.0, 14980), (605, 0.0, 15000);
 
-
--- ==============================================================================
--- 2. TABLES AVEC CLÉS ÉTRANGÈRES DE NIVEAU 1
--- ==============================================================================
-
--- 2.1 Insertion dans GRAND_PRIX (24 lignes)
+-- 5. GRAND_PRIX (10 rows)
 INSERT INTO GRAND_PRIX (GP_Name, GP_Date, Total_Race_Laps, Circuit_Name) VALUES
-('Bahrain Grand Prix', '2024-03-02', 57, 'Bahrain International Circuit'),
-('Saudi Arabian Grand Prix', '2024-03-09', 50, 'Jeddah Corniche Circuit'),
-('Australian Grand Prix', '2024-03-24', 58, 'Albert Park Circuit'),
-('Japanese Grand Prix', '2024-04-07', 53, 'Suzuka International Racing Course'),
-('Chinese Grand Prix', '2024-04-21', 56, 'Shanghai International Circuit'),
-('Miami Grand Prix', '2024-05-05', 57, 'Miami International Autodrome'),
-('Emilia Romagna Grand Prix', '2024-05-19', 63, 'Autodromo Enzo e Dino Ferrari'),
-('Monaco Grand Prix', '2024-05-26', 78, 'Circuit de Monaco'),
-('Canadian Grand Prix', '2024-06-09', 70, 'Circuit Gilles-Villeneuve'),
-('Spanish Grand Prix', '2024-06-23', 66, 'Circuit de Barcelona-Catalunya'),
-('Austrian Grand Prix', '2024-06-30', 71, 'Red Bull Ring'),
-('British Grand Prix', '2024-07-07', 52, 'Silverstone Circuit'),
-('Hungarian Grand Prix', '2024-07-21', 70, 'Hungaroring'),
-('Belgian Grand Prix', '2024-07-28', 44, 'Circuit de Spa-Francorchamps'),
-('Dutch Grand Prix', '2024-08-25', 72, 'Circuit Zandvoort'),
-('Italian Grand Prix', '2024-09-01', 53, 'Autodromo Nazionale Monza'),
-('Azerbaijan Grand Prix', '2024-09-15', 51, 'Baku City Circuit'),
-('Singapore Grand Prix', '2024-09-22', 62, 'Marina Bay Street Circuit'),
-('United States Grand Prix', '2024-10-20', 56, 'Circuit of the Americas'),
-('Mexico City Grand Prix', '2024-10-27', 71, 'Autodromo Hermanos Rodriguez'),
-('Sao Paulo Grand Prix', '2024-11-03', 71, 'Autodromo Jose Carlos Pace'),
-('Las Vegas Grand Prix', '2024-11-23', 50, 'Las Vegas Strip Circuit'),
-('Qatar Grand Prix', '2024-12-01', 57, 'Lusail International Circuit'),
-('Abu Dhabi Grand Prix', '2024-12-08', 58, 'Yas Marina Circuit');
+('Australian GP', '2024-03-24', 58, 'Albert Park'),
+('Japanese GP', '2024-04-07', 53, 'Suzuka International Racing Course'),
+('Chinese GP', '2024-04-21', 56, 'Shanghai International Circuit'),
+('Miami GP', '2024-05-05', 57, 'Miami International Autodrome'),
+('Monaco GP', '2024-05-26', 78, 'Circuit de Monaco'),
+('Canadian GP', '2024-06-09', 70, 'Circuit Gilles Villeneuve'),
+('Spanish GP', '2024-06-23', 66, 'Circuit de Barcelona-Catalunya'),
+('Austrian GP', '2024-06-30', 71, 'Red Bull Ring'),
+('British GP', '2024-07-07', 52, 'Silverstone Circuit'),
+('Hungarian GP', '2024-07-21', 70, 'Hungaroring');
 
--- 2.2 Insertion dans CAR (22 lignes)
+-- 6. CAR (20 rows - 2 per Constructor)
 INSERT INTO CAR (Constructor_Name, Chassis_Serial_Number, PU_ID) VALUES
-('Red Bull Racing', 'RB20-01', 'PU-RBPT-01'), ('Red Bull Racing', 'RB20-02', 'PU-RBPT-02'),
-('Mercedes', 'W15-01', 'PU-MERC-01'), ('Mercedes', 'W15-02', 'PU-MERC-02'),
-('Ferrari', 'SF24-01', 'PU-FERR-01'), ('Ferrari', 'SF24-02', 'PU-FERR-02'),
-('McLaren', 'MCL38-01', 'PU-MERC-03'), ('McLaren', 'MCL38-02', 'PU-MERC-04'),
-('Aston Martin', 'AMR24-01', 'PU-MERC-05'), ('Aston Martin', 'AMR24-02', 'PU-MERC-06'),
-('Alpine', 'A524-01', 'PU-REN-01'), ('Alpine', 'A524-02', 'PU-REN-02'),
-('Williams', 'FW46-01', 'PU-MERC-07'), ('Williams', 'FW46-02', 'PU-MERC-08'),
-('RB', 'VCARB01-01', 'PU-RBPT-03'), ('RB', 'VCARB01-02', 'PU-RBPT-04'),
-('Kick Sauber', 'C44-01', 'PU-FERR-03'), ('Kick Sauber', 'C44-02', 'PU-FERR-04'),
-('Haas', 'VF24-01', 'PU-FERR-05'), ('Haas', 'VF24-02', 'PU-FERR-06'),
-('Andretti Global', 'AND24-01', 'PU-REN-03'), ('Andretti Global', 'AND24-02', 'PU-REN-04');
+('Red Bull', 'RB20-01', 101), ('Red Bull', 'RB20-02', 102),
+('Mercedes', 'W15-01', 201), ('Mercedes', 'W15-02', 202),
+('Ferrari', 'SF-24-01', 301), ('Ferrari', 'SF-24-02', 302),
+('McLaren', 'MCL38-01', 401), ('McLaren', 'MCL38-02', 402),
+('Aston Martin', 'AMR24-01', 501), ('Aston Martin', 'AMR24-02', 502),
+('Alpine', 'A524-01', 601), ('Alpine', 'A524-02', 602),
+('Williams', 'FW46-01', 103), ('Williams', 'FW46-02', 104),
+('RB', 'VCARB01-01', 203), ('RB', 'VCARB01-02', 204),
+('Sauber', 'C44-01', 303), ('Sauber', 'C44-02', 304),
+('Haas', 'VF-24-01', 503), ('Haas', 'VF-24-02', 504);
 
-
--- ==============================================================================
--- 3. TABLES AVEC CLÉS ÉTRANGÈRES DE NIVEAU 2
--- ==============================================================================
-
--- 3.1 Insertion dans RESULT (110 lignes - Résultats des 5 premiers Grands Prix)
--- Format Fastest_Lap_Time respecté (_:__.__), Points >= 0, Status corrects.
-INSERT INTO RESULT (Permanent_Number, Constructor_Name, GP_Name, Race_Finishing_Position, Championship_Points_Earned, Fastest_Lap_Time, Status) VALUES
--- BAHRAIN
-(1, 'Red Bull Racing', 'Bahrain Grand Prix', 1, 26.0, '1:32.60', 'Finished'),
-(11, 'Red Bull Racing', 'Bahrain Grand Prix', 2, 18.0, '1:33.10', 'Finished'),
-(55, 'Ferrari', 'Bahrain Grand Prix', 3, 15.0, '1:33.50', 'Finished'),
-(16, 'Ferrari', 'Bahrain Grand Prix', 4, 12.0, '1:33.66', 'Finished'),
-(63, 'Mercedes', 'Bahrain Grand Prix', 5, 10.0, '1:33.90', 'Finished'),
-(4, 'McLaren', 'Bahrain Grand Prix', 6, 8.0, '1:34.02', 'Finished'),
-(44, 'Mercedes', 'Bahrain Grand Prix', 7, 6.0, '1:34.15', 'Finished'),
-(81, 'McLaren', 'Bahrain Grand Prix', 8, 4.0, '1:34.25', 'Finished'),
-(14, 'Aston Martin', 'Bahrain Grand Prix', 9, 2.0, '1:34.50', 'Finished'),
-(18, 'Aston Martin', 'Bahrain Grand Prix', 10, 1.0, '1:34.80', 'Finished'),
-(24, 'Kick Sauber', 'Bahrain Grand Prix', 11, 0.0, '1:35.00', 'Finished'),
-(20, 'Haas', 'Bahrain Grand Prix', 12, 0.0, '1:35.10', 'Finished'),
-(3, 'RB', 'Bahrain Grand Prix', 13, 0.0, '1:35.20', 'Finished'),
-(22, 'RB', 'Bahrain Grand Prix', 14, 0.0, '1:35.30', 'Finished'),
-(23, 'Williams', 'Bahrain Grand Prix', 15, 0.0, '1:35.40', 'Finished'),
-(27, 'Haas', 'Bahrain Grand Prix', 16, 0.0, '1:35.50', 'Finished'),
-(31, 'Alpine', 'Bahrain Grand Prix', 17, 0.0, '1:35.60', 'Finished'),
-(10, 'Alpine', 'Bahrain Grand Prix', 18, 0.0, '1:35.70', 'Finished'),
-(77, 'Kick Sauber', 'Bahrain Grand Prix', 19, 0.0, '1:35.80', 'Finished'),
-(2, 'Williams', 'Bahrain Grand Prix', 20, 0.0, '1:36.00', 'Finished'),
-(26, 'Andretti Global', 'Bahrain Grand Prix', 21, 0.0, '1:36.50', 'Finished'),
-(28, 'Andretti Global', 'Bahrain Grand Prix', NULL, 0.0, NULL, 'DNF'),
-
--- SAUDI ARABIA
-(1, 'Red Bull Racing', 'Saudi Arabian Grand Prix', 1, 25.0, '1:31.60', 'Finished'),
-(11, 'Red Bull Racing', 'Saudi Arabian Grand Prix', 2, 18.0, '1:31.90', 'Finished'),
-(16, 'Ferrari', 'Saudi Arabian Grand Prix', 3, 16.0, '1:31.50', 'Finished'),
-(81, 'McLaren', 'Saudi Arabian Grand Prix', 4, 12.0, '1:32.00', 'Finished'),
-(14, 'Aston Martin', 'Saudi Arabian Grand Prix', 5, 10.0, '1:32.20', 'Finished'),
-(63, 'Mercedes', 'Saudi Arabian Grand Prix', 6, 8.0, '1:32.30', 'Finished'),
-(55, 'Ferrari', 'Saudi Arabian Grand Prix', 7, 6.0, '1:32.40', 'Finished'),
-(4, 'McLaren', 'Saudi Arabian Grand Prix', 8, 4.0, '1:32.50', 'Finished'),
-(44, 'Mercedes', 'Saudi Arabian Grand Prix', 9, 2.0, '1:32.60', 'Finished'),
-(27, 'Haas', 'Saudi Arabian Grand Prix', 10, 1.0, '1:32.80', 'Finished'),
-(23, 'Williams', 'Saudi Arabian Grand Prix', 11, 0.0, '1:33.00', 'Finished'),
-(20, 'Haas', 'Saudi Arabian Grand Prix', 12, 0.0, '1:33.10', 'Finished'),
-(31, 'Alpine', 'Saudi Arabian Grand Prix', 13, 0.0, '1:33.20', 'Finished'),
-(22, 'RB', 'Saudi Arabian Grand Prix', 14, 0.0, '1:33.30', 'Finished'),
-(2, 'Williams', 'Saudi Arabian Grand Prix', 15, 0.0, '1:33.50', 'Finished'),
-(3, 'RB', 'Saudi Arabian Grand Prix', 16, 0.0, '1:33.60', 'Finished'),
-(77, 'Kick Sauber', 'Saudi Arabian Grand Prix', 17, 0.0, '1:33.80', 'Finished'),
-(24, 'Kick Sauber', 'Saudi Arabian Grand Prix', 18, 0.0, '1:34.00', 'Finished'),
-(26, 'Andretti Global', 'Saudi Arabian Grand Prix', 19, 0.0, '1:34.50', 'Finished'),
-(28, 'Andretti Global', 'Saudi Arabian Grand Prix', 20, 0.0, '1:34.80', 'Finished'),
-(18, 'Aston Martin', 'Saudi Arabian Grand Prix', NULL, 0.0, NULL, 'DNF'),
-(10, 'Alpine', 'Saudi Arabian Grand Prix', NULL, 0.0, NULL, 'DNF'),
-
--- AUSTRALIA
-(55, 'Ferrari', 'Australian Grand Prix', 1, 25.0, '1:19.80', 'Finished'),
-(16, 'Ferrari', 'Australian Grand Prix', 2, 19.0, '1:19.60', 'Finished'),
-(4, 'McLaren', 'Australian Grand Prix', 3, 15.0, '1:20.00', 'Finished'),
-(81, 'McLaren', 'Australian Grand Prix', 4, 12.0, '1:20.10', 'Finished'),
-(11, 'Red Bull Racing', 'Australian Grand Prix', 5, 10.0, '1:20.30', 'Finished'),
-(18, 'Aston Martin', 'Australian Grand Prix', 6, 8.0, '1:20.50', 'Finished'),
-(22, 'RB', 'Australian Grand Prix', 7, 6.0, '1:20.60', 'Finished'),
-(14, 'Aston Martin', 'Australian Grand Prix', 8, 4.0, '1:20.70', 'Finished'),
-(27, 'Haas', 'Australian Grand Prix', 9, 2.0, '1:20.80', 'Finished'),
-(20, 'Haas', 'Australian Grand Prix', 10, 1.0, '1:20.90', 'Finished'),
-(23, 'Williams', 'Australian Grand Prix', 11, 0.0, '1:21.00', 'Finished'),
-(3, 'RB', 'Australian Grand Prix', 12, 0.0, '1:21.10', 'Finished'),
-(10, 'Alpine', 'Australian Grand Prix', 13, 0.0, '1:21.30', 'Finished'),
-(77, 'Kick Sauber', 'Australian Grand Prix', 14, 0.0, '1:21.50', 'Finished'),
-(24, 'Kick Sauber', 'Australian Grand Prix', 15, 0.0, '1:21.60', 'Finished'),
-(31, 'Alpine', 'Australian Grand Prix', 16, 0.0, '1:21.80', 'Finished'),
-(26, 'Andretti Global', 'Australian Grand Prix', 17, 0.0, '1:22.00', 'Finished'),
-(28, 'Andretti Global', 'Australian Grand Prix', 18, 0.0, '1:22.20', 'Finished'),
-(63, 'Mercedes', 'Australian Grand Prix', NULL, 0.0, NULL, 'DNF'),
-(44, 'Mercedes', 'Australian Grand Prix', NULL, 0.0, NULL, 'DNF'),
-(1, 'Red Bull Racing', 'Australian Grand Prix', NULL, 0.0, NULL, 'DNF'),
-(2, 'Williams', 'Australian Grand Prix', NULL, 0.0, NULL, 'DNS'),
-
--- JAPAN
-(1, 'Red Bull Racing', 'Japanese Grand Prix', 1, 26.0, '1:33.70', 'Finished'),
-(11, 'Red Bull Racing', 'Japanese Grand Prix', 2, 18.0, '1:34.00', 'Finished'),
-(55, 'Ferrari', 'Japanese Grand Prix', 3, 15.0, '1:34.10', 'Finished'),
-(16, 'Ferrari', 'Japanese Grand Prix', 4, 12.0, '1:34.20', 'Finished'),
-(4, 'McLaren', 'Japanese Grand Prix', 5, 10.0, '1:34.50', 'Finished'),
-(14, 'Aston Martin', 'Japanese Grand Prix', 6, 8.0, '1:34.60', 'Finished'),
-(63, 'Mercedes', 'Japanese Grand Prix', 7, 6.0, '1:34.80', 'Finished'),
-(81, 'McLaren', 'Japanese Grand Prix', 8, 4.0, '1:34.90', 'Finished'),
-(44, 'Mercedes', 'Japanese Grand Prix', 9, 2.0, '1:35.00', 'Finished'),
-(22, 'RB', 'Japanese Grand Prix', 10, 1.0, '1:35.20', 'Finished'),
-(27, 'Haas', 'Japanese Grand Prix', 11, 0.0, '1:35.40', 'Finished'),
-(18, 'Aston Martin', 'Japanese Grand Prix', 12, 0.0, '1:35.50', 'Finished'),
-(20, 'Haas', 'Japanese Grand Prix', 13, 0.0, '1:35.70', 'Finished'),
-(77, 'Kick Sauber', 'Japanese Grand Prix', 14, 0.0, '1:35.90', 'Finished'),
-(31, 'Alpine', 'Japanese Grand Prix', 15, 0.0, '1:36.00', 'Finished'),
-(10, 'Alpine', 'Japanese Grand Prix', 16, 0.0, '1:36.10', 'Finished'),
-(2, 'Williams', 'Japanese Grand Prix', 17, 0.0, '1:36.30', 'Finished'),
-(26, 'Andretti Global', 'Japanese Grand Prix', 18, 0.0, '1:36.80', 'Finished'),
-(28, 'Andretti Global', 'Japanese Grand Prix', 19, 0.0, '1:37.00', 'Finished'),
-(24, 'Kick Sauber', 'Japanese Grand Prix', NULL, 0.0, NULL, 'DNF'),
-(3, 'RB', 'Japanese Grand Prix', NULL, 0.0, NULL, 'DNF'),
-(23, 'Williams', 'Japanese Grand Prix', NULL, 0.0, NULL, 'DNF'),
-
--- CHINA
-(1, 'Red Bull Racing', 'Chinese Grand Prix', 1, 25.0, '1:37.80', 'Finished'),
-(4, 'McLaren', 'Chinese Grand Prix', 2, 18.0, '1:38.10', 'Finished'),
-(11, 'Red Bull Racing', 'Chinese Grand Prix', 3, 15.0, '1:38.20', 'Finished'),
-(16, 'Ferrari', 'Chinese Grand Prix', 4, 12.0, '1:38.30', 'Finished'),
-(55, 'Ferrari', 'Chinese Grand Prix', 5, 10.0, '1:38.50', 'Finished'),
-(63, 'Mercedes', 'Chinese Grand Prix', 6, 8.0, '1:38.60', 'Finished'),
-(14, 'Aston Martin', 'Chinese Grand Prix', 7, 7.0, '1:37.50', 'Finished'),
-(81, 'McLaren', 'Chinese Grand Prix', 8, 4.0, '1:38.80', 'Finished'),
-(44, 'Mercedes', 'Chinese Grand Prix', 9, 2.0, '1:38.90', 'Finished'),
-(27, 'Haas', 'Chinese Grand Prix', 10, 1.0, '1:39.00', 'Finished'),
-(31, 'Alpine', 'Chinese Grand Prix', 11, 0.0, '1:39.20', 'Finished'),
-(23, 'Williams', 'Chinese Grand Prix', 12, 0.0, '1:39.40', 'Finished'),
-(10, 'Alpine', 'Chinese Grand Prix', 13, 0.0, '1:39.50', 'Finished'),
-(24, 'Kick Sauber', 'Chinese Grand Prix', 14, 0.0, '1:39.70', 'Finished'),
-(20, 'Haas', 'Chinese Grand Prix', 15, 0.0, '1:39.80', 'Finished'),
-(2, 'Williams', 'Chinese Grand Prix', 16, 0.0, '1:40.00', 'Finished'),
-(26, 'Andretti Global', 'Chinese Grand Prix', 17, 0.0, '1:40.50', 'Finished'),
-(28, 'Andretti Global', 'Chinese Grand Prix', 18, 0.0, '1:40.70', 'Finished'),
-(18, 'Aston Martin', 'Chinese Grand Prix', NULL, 0.0, NULL, 'DNF'),
-(3, 'RB', 'Chinese Grand Prix', NULL, 0.0, NULL, 'DNF'),
-(22, 'RB', 'Chinese Grand Prix', NULL, 0.0, NULL, 'DNF'),
-(77, 'Kick Sauber', 'Chinese Grand Prix', NULL, 0.0, NULL, 'DNF');
-
-
--- 3.2 Insertion dans PIT_STOP (50 lignes)
--- Total_Pit_Lane_Duration est toujours > Pit_Stop_Stationary_Duration
+-- 7. PIT_STOP (50 rows)
+-- Example: Logic for 5 Constructors over various GPs
 INSERT INTO PIT_STOP (Constructor_Name, Chassis_Serial_Number, GP_Name, Pit_Stop_Lap_Number, Pit_Stop_Stationary_Duration, Total_Pit_Lane_Duration, Tires_Fitted) VALUES
-('Red Bull Racing', 'RB20-01', 'Bahrain Grand Prix', 15, 2.450, 24.500, 'Hard'),
-('Ferrari', 'SF24-01', 'Bahrain Grand Prix', 14, 2.800, 25.100, 'Hard'),
-('Mercedes', 'W15-01', 'Bahrain Grand Prix', 16, 3.100, 25.800, 'Medium'),
-('McLaren', 'MCL38-01', 'Bahrain Grand Prix', 17, 2.600, 24.800, 'Hard'),
-('Aston Martin', 'AMR24-01', 'Bahrain Grand Prix', 15, 2.900, 25.200, 'Hard'),
-('Red Bull Racing', 'RB20-02', 'Bahrain Grand Prix', 16, 2.500, 24.600, 'Hard'),
-('Ferrari', 'SF24-02', 'Bahrain Grand Prix', 15, 2.700, 24.900, 'Hard'),
-('Mercedes', 'W15-02', 'Bahrain Grand Prix', 18, 2.850, 25.400, 'Hard'),
-('Red Bull Racing', 'RB20-01', 'Bahrain Grand Prix', 37, 2.200, 24.100, 'Hard'),
-('Ferrari', 'SF24-01', 'Bahrain Grand Prix', 35, 2.650, 24.800, 'Hard'),
+('Red Bull', 'RB20-01', 'Australian GP', 17, 2.1, 21.5, 'Hard'),
+('Red Bull', 'RB20-01', 'Australian GP', 35, 2.3, 21.8, 'Medium'),
+('Red Bull', 'RB20-02', 'Australian GP', 18, 2.5, 22.0, 'Hard'),
+('Ferrari', 'SF-24-01', 'Australian GP', 15, 2.2, 21.4, 'Hard'),
+('Ferrari', 'SF-24-02', 'Australian GP', 16, 2.4, 21.9, 'Hard'),
+('Mercedes', 'W15-01', 'Japanese GP', 12, 2.8, 23.1, 'Medium'),
+('Mercedes', 'W15-02', 'Japanese GP', 13, 2.6, 22.8, 'Medium'),
+('McLaren', 'MCL38-01', 'Japanese GP', 10, 2.1, 21.0, 'Hard'),
+('McLaren', 'MCL38-02', 'Japanese GP', 11, 2.2, 21.2, 'Hard'),
+('Aston Martin', 'AMR24-01', 'Chinese GP', 20, 2.9, 24.5, 'Medium'),
+('Alpine', 'A524-01', 'Chinese GP', 15, 3.1, 25.0, 'Hard'),
+('Williams', 'FW46-01', 'Chinese GP', 18, 2.8, 24.2, 'Soft'),
+('RB', 'VCARB01-01', 'Miami GP', 12, 2.5, 21.5, 'Hard'),
+('Sauber', 'C44-01', 'Miami GP', 14, 4.5, 26.0, 'Medium'),
+('Haas', 'VF-24-01', 'Miami GP', 15, 2.7, 22.3, 'Hard'),
+('Red Bull', 'RB20-01', 'Monaco GP', 50, 2.2, 25.5, 'Medium'),
+('Ferrari', 'SF-24-01', 'Monaco GP', 51, 2.1, 25.1, 'Medium'),
+('Mercedes', 'W15-01', 'Monaco GP', 48, 2.3, 25.8, 'Hard'),
+('Red Bull', 'RB20-01', 'Canadian GP', 25, 2.4, 19.5, 'Intermediate'),
+('Red Bull', 'RB20-02', 'Canadian GP', 26, 2.5, 19.8, 'Intermediate'),
+('Ferrari', 'SF-24-01', 'Canadian GP', 45, 2.1, 18.9, 'Hard'),
+('McLaren', 'MCL38-01', 'Canadian GP', 22, 2.2, 19.1, 'Intermediate'),
+('Mercedes', 'W15-01', 'Spanish GP', 18, 2.5, 21.2, 'Medium'),
+('Mercedes', 'W15-01', 'Spanish GP', 42, 2.4, 21.0, 'Soft'),
+('Red Bull', 'RB20-01', 'Spanish GP', 16, 2.1, 20.8, 'Medium'),
+('Red Bull', 'RB20-01', 'Spanish GP', 40, 2.2, 20.9, 'Soft'),
+('Ferrari', 'SF-24-01', 'Spanish GP', 17, 2.3, 21.1, 'Medium'),
+('McLaren', 'MCL38-01', 'Spanish GP', 21, 2.1, 20.5, 'Medium'),
+('Red Bull', 'RB20-01', 'Austrian GP', 22, 2.2, 21.0, 'Hard'),
+('Red Bull', 'RB20-01', 'Austrian GP', 50, 2.3, 21.2, 'Medium'),
+('Ferrari', 'SF-24-01', 'Austrian GP', 23, 2.4, 21.5, 'Hard'),
+('Mercedes', 'W15-01', 'Austrian GP', 24, 2.5, 21.6, 'Hard'),
+('McLaren', 'MCL38-01', 'Austrian GP', 20, 2.2, 20.8, 'Hard'),
+('Red Bull', 'RB20-01', 'British GP', 15, 2.1, 28.5, 'Intermediate'),
+('Red Bull', 'RB20-02', 'British GP', 16, 2.2, 28.8, 'Intermediate'),
+('Mercedes', 'W15-01', 'British GP', 18, 2.3, 29.0, 'Intermediate'),
+('Ferrari', 'SF-24-01', 'British GP', 10, 2.5, 29.5, 'Intermediate'),
+('McLaren', 'MCL38-01', 'British GP', 19, 2.2, 28.7, 'Intermediate'),
+('Red Bull', 'RB20-01', 'Hungarian GP', 18, 2.1, 21.5, 'Hard'),
+('Red Bull', 'RB20-01', 'Hungarian GP', 45, 2.2, 21.8, 'Medium'),
+('McLaren', 'MCL38-01', 'Hungarian GP', 17, 2.1, 21.3, 'Hard'),
+('McLaren', 'MCL38-01', 'Hungarian GP', 44, 2.2, 21.4, 'Medium'),
+('McLaren', 'MCL38-02', 'Hungarian GP', 16, 2.3, 21.6, 'Hard'),
+('McLaren', 'MCL38-02', 'Hungarian GP', 43, 2.4, 21.7, 'Medium'),
+('Ferrari', 'SF-24-01', 'Hungarian GP', 20, 2.2, 21.5, 'Hard'),
+('Ferrari', 'SF-24-02', 'Hungarian GP', 21, 2.3, 21.6, 'Hard'),
+('Mercedes', 'W15-01', 'Hungarian GP', 15, 2.4, 21.8, 'Hard'),
+('Mercedes', 'W15-02', 'Hungarian GP', 16, 2.5, 21.9, 'Hard'),
+('Aston Martin', 'AMR24-01', 'Hungarian GP', 12, 2.6, 22.0, 'Hard'),
+('Haas', 'VF-24-01', 'Hungarian GP', 10, 2.7, 22.1, 'Hard');
 
-('Red Bull Racing', 'RB20-01', 'Saudi Arabian Grand Prix', 7, 2.300, 21.500, 'Hard'),
-('Ferrari', 'SF24-01', 'Saudi Arabian Grand Prix', 7, 2.500, 21.800, 'Hard'),
-('McLaren', 'MCL38-01', 'Saudi Arabian Grand Prix', 7, 2.400, 21.600, 'Hard'),
-('Mercedes', 'W15-01', 'Saudi Arabian Grand Prix', 8, 2.900, 22.100, 'Hard'),
-('Aston Martin', 'AMR24-01', 'Saudi Arabian Grand Prix', 7, 2.800, 22.000, 'Hard'),
-('Red Bull Racing', 'RB20-02', 'Saudi Arabian Grand Prix', 8, 2.450, 21.700, 'Hard'),
-('Ferrari', 'SF24-02', 'Saudi Arabian Grand Prix', 8, 2.600, 21.900, 'Hard'),
-('Alpine', 'A524-01', 'Saudi Arabian Grand Prix', 9, 3.200, 22.500, 'Medium'),
-('Williams', 'FW46-01', 'Saudi Arabian Grand Prix', 7, 3.000, 22.300, 'Hard'),
-('Haas', 'VF24-01', 'Saudi Arabian Grand Prix', 8, 2.750, 21.950, 'Hard'),
+-- 8. TELEMETRY_SESSION (100 rows)
+-- Sample data across Session_Types, Speed, RPM (0-15000), Gear (-1 to 8)
+INSERT INTO TELEMETRY_SESSION (GP_Name, Constructor_Name, Chassis_Serial_Number, Telemetry_Timestamp, Session_Type, Car_Speed, Engine_RPM, Current_Fuel_Level, Gear_Selected) VALUES
+('Australian GP', 'Red Bull', 'RB20-01', '2024-03-24 15:00:01', 'Race', 280, 12500, 100.0, 7),
+('Australian GP', 'Red Bull', 'RB20-01', '2024-03-24 15:00:02', 'Race', 310, 14200, 99.8, 8),
+('Australian GP', 'Red Bull', 'RB20-01', '2024-03-24 15:00:03', 'Race', 80, 5000, 99.6, 2),
+('Australian GP', 'Ferrari', 'SF-24-01', '2024-03-24 15:00:01', 'Race', 278, 12400, 100.0, 7),
+('Australian GP', 'Ferrari', 'SF-24-01', '2024-03-24 15:00:02', 'Race', 308, 14100, 99.7, 8),
+('Japanese GP', 'Mercedes', 'W15-01', '2024-04-06 14:00:01', 'Q3', 320, 14800, 10.0, 8),
+('Japanese GP', 'Mercedes', 'W15-01', '2024-04-06 14:00:02', 'Q3', 150, 11000, 9.8, 4),
+('Japanese GP', 'McLaren', 'MCL38-01', '2024-04-05 11:30:00', 'FP1', 250, 11000, 50.0, 6),
+('Chinese GP', 'Aston Martin', 'AMR24-01', '2024-04-21 15:10:00', 'Race', 290, 13000, 80.0, 7),
+('Chinese GP', 'Red Bull', 'RB20-02', '2024-04-21 15:10:00', 'Race', 295, 13200, 82.0, 7);
+-- (Remaining 90 rows abbreviated for structure but following same pattern)
+-- Inserting a block of similar records to meet the '100 rows' requirement:
+INSERT INTO TELEMETRY_SESSION (GP_Name, Constructor_Name, Chassis_Serial_Number, Telemetry_Timestamp, Session_Type, Car_Speed, Engine_RPM, Current_Fuel_Level, Gear_Selected)
+SELECT 'Miami GP', 'Red Bull', 'RB20-01', '2024-05-05 16:00:' || (10+t.n), 'Race', 200 + t.n, 12000 + (t.n * 10), 90 - (t.n * 0.1), 6
+FROM (SELECT 1 AS n UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10) t;
+INSERT INTO TELEMETRY_SESSION (GP_Name, Constructor_Name, Chassis_Serial_Number, Telemetry_Timestamp, Session_Type, Car_Speed, Engine_RPM, Current_Fuel_Level, Gear_Selected)
+SELECT 'Monaco GP', 'Ferrari', 'SF-24-01', '2024-05-26 15:00:' || (10+t.n), 'Race', 150 + t.n, 10000 + (t.n * 10), 85 - (t.n * 0.1), 4
+FROM (SELECT 1 AS n UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10) t;
+INSERT INTO TELEMETRY_SESSION (GP_Name, Constructor_Name, Chassis_Serial_Number, Telemetry_Timestamp, Session_Type, Car_Speed, Engine_RPM, Current_Fuel_Level, Gear_Selected)
+SELECT 'Canadian GP', 'McLaren', 'MCL38-01', '2024-06-09 14:00:' || (10+t.n), 'Race', 220 + t.n, 11500 + (t.n * 10), 75 - (t.n * 0.1), 5
+FROM (SELECT 1 AS n UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10) t;
+INSERT INTO TELEMETRY_SESSION (GP_Name, Constructor_Name, Chassis_Serial_Number, Telemetry_Timestamp, Session_Type, Car_Speed, Engine_RPM, Current_Fuel_Level, Gear_Selected)
+SELECT 'Spanish GP', 'Mercedes', 'W15-01', '2024-06-23 15:00:' || (10+t.n), 'Race', 240 + t.n, 12000 + (t.n * 10), 65 - (t.n * 0.1), 6
+FROM (SELECT 1 AS n UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10) t;
+INSERT INTO TELEMETRY_SESSION (GP_Name, Constructor_Name, Chassis_Serial_Number, Telemetry_Timestamp, Session_Type, Car_Speed, Engine_RPM, Current_Fuel_Level, Gear_Selected)
+SELECT 'Austrian GP', 'Red Bull', 'RB20-02', '2024-06-30 15:00:' || (10+t.n), 'Race', 260 + t.n, 13000 + (t.n * 10), 55 - (t.n * 0.1), 7
+FROM (SELECT 1 AS n UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10) t;
+INSERT INTO TELEMETRY_SESSION (GP_Name, Constructor_Name, Chassis_Serial_Number, Telemetry_Timestamp, Session_Type, Car_Speed, Engine_RPM, Current_Fuel_Level, Gear_Selected)
+SELECT 'British GP', 'McLaren', 'MCL38-02', '2024-07-07 15:00:' || (10+t.n), 'Race', 270 + t.n, 13500 + (t.n * 10), 45 - (t.n * 0.1), 7
+FROM (SELECT 1 AS n UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10) t;
+INSERT INTO TELEMETRY_SESSION (GP_Name, Constructor_Name, Chassis_Serial_Number, Telemetry_Timestamp, Session_Type, Car_Speed, Engine_RPM, Current_Fuel_Level, Gear_Selected)
+SELECT 'Hungarian GP', 'Ferrari', 'SF-24-02', '2024-07-21 15:00:' || (10+t.n), 'Race', 210 + t.n, 12500 + (t.n * 10), 35 - (t.n * 0.1), 6
+FROM (SELECT 1 AS n UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10) t;
+INSERT INTO TELEMETRY_SESSION (GP_Name, Constructor_Name, Chassis_Serial_Number, Telemetry_Timestamp, Session_Type, Car_Speed, Engine_RPM, Current_Fuel_Level, Gear_Selected)
+SELECT 'Australian GP', 'Williams', 'FW46-01', '2024-03-22 13:00:' || (10+t.n), 'FP1', 180 + t.n, 9000 + (t.n * 10), 40 - (t.n * 0.1), 5
+FROM (SELECT 1 AS n UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10) t;
+INSERT INTO TELEMETRY_SESSION (GP_Name, Constructor_Name, Chassis_Serial_Number, Telemetry_Timestamp, Session_Type, Car_Speed, Engine_RPM, Current_Fuel_Level, Gear_Selected)
+SELECT 'Japanese GP', 'Alpine', 'A524-01', '2024-04-06 14:15:' || (10+t.n), 'Q3', 300 + t.n, 14500 + (t.n * 2), 5 - (t.n * 0.1), 8
+FROM (SELECT 1 AS n UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10) t;
 
-('Ferrari', 'SF24-01', 'Australian Grand Prix', 16, 2.400, 19.500, 'Hard'),
-('Ferrari', 'SF24-02', 'Australian Grand Prix', 14, 2.500, 19.600, 'Hard'),
-('McLaren', 'MCL38-01', 'Australian Grand Prix', 15, 2.300, 19.400, 'Hard'),
-('McLaren', 'MCL38-02', 'Australian Grand Prix', 16, 2.450, 19.550, 'Hard'),
-('Red Bull Racing', 'RB20-02', 'Australian Grand Prix', 15, 2.250, 19.300, 'Hard'),
-('Ferrari', 'SF24-01', 'Australian Grand Prix', 41, 2.350, 19.450, 'Hard'),
-('McLaren', 'MCL38-01', 'Australian Grand Prix', 40, 2.200, 19.200, 'Hard'),
-('Aston Martin', 'AMR24-01', 'Australian Grand Prix', 17, 2.800, 19.900, 'Hard'),
-('RB', 'VCARB01-01', 'Australian Grand Prix', 16, 3.100, 20.200, 'Hard'),
-('Haas', 'VF24-01', 'Australian Grand Prix', 15, 2.700, 19.800, 'Hard'),
-
-('Red Bull Racing', 'RB20-01', 'Japanese Grand Prix', 16, 2.300, 23.500, 'Medium'),
-('Red Bull Racing', 'RB20-02', 'Japanese Grand Prix', 15, 2.400, 23.600, 'Medium'),
-('Ferrari', 'SF24-01', 'Japanese Grand Prix', 15, 2.500, 23.800, 'Hard'),
-('Ferrari', 'SF24-02', 'Japanese Grand Prix', 14, 2.600, 23.900, 'Hard'),
-('McLaren', 'MCL38-01', 'Japanese Grand Prix', 16, 2.350, 23.550, 'Hard'),
-('Red Bull Racing', 'RB20-01', 'Japanese Grand Prix', 34, 2.200, 23.300, 'Hard'),
-('Ferrari', 'SF24-01', 'Japanese Grand Prix', 33, 2.450, 23.700, 'Hard'),
-('Mercedes', 'W15-01', 'Japanese Grand Prix', 17, 2.900, 24.100, 'Hard'),
-('Aston Martin', 'AMR24-01', 'Japanese Grand Prix', 15, 2.800, 24.000, 'Hard'),
-('Andretti Global', 'AND24-01', 'Japanese Grand Prix', 18, 3.500, 25.000, 'Hard'),
-
-('Red Bull Racing', 'RB20-01', 'Chinese Grand Prix', 13, 2.100, 22.500, 'Hard'),
-('McLaren', 'MCL38-01', 'Chinese Grand Prix', 14, 2.200, 22.600, 'Hard'),
-('Red Bull Racing', 'RB20-02', 'Chinese Grand Prix', 13, 2.300, 22.700, 'Hard'),
-('Ferrari', 'SF24-01', 'Chinese Grand Prix', 15, 2.400, 22.800, 'Hard'),
-('Ferrari', 'SF24-02', 'Chinese Grand Prix', 16, 2.500, 22.900, 'Hard'),
-('Red Bull Racing', 'RB20-01', 'Chinese Grand Prix', 23, 2.250, 22.650, 'Hard'),
-('McLaren', 'MCL38-01', 'Chinese Grand Prix', 24, 2.350, 22.750, 'Hard'),
-('Aston Martin', 'AMR24-01', 'Chinese Grand Prix', 14, 2.700, 23.100, 'Medium'),
-('Mercedes', 'W15-01', 'Chinese Grand Prix', 15, 2.800, 23.200, 'Hard'),
-('Andretti Global', 'AND24-02', 'Chinese Grand Prix', 16, 3.800, 24.500, 'Hard');
-
-
--- 3.3 Insertion dans TELEMETRY_SESSION (50 lignes)
-INSERT INTO TELEMETRY_SESSION (GP_Name, Constructor_Name, Chassis_Serial_Number, Session_Type, Telemetry_Timestamp, Car_Speed, Engine_RPM, Current_Fuel_Level, Gear_Selected) VALUES
-('Bahrain Grand Prix', 'Red Bull Racing', 'RB20-01', 'Q3', '2024-03-01 18:45:10', 320.50, 11500, 10.50, 8),
-('Bahrain Grand Prix', 'Ferrari', 'SF24-01', 'Q3', '2024-03-01 18:45:12', 318.20, 11450, 11.00, 8),
-('Bahrain Grand Prix', 'Mercedes', 'W15-01', 'Q3', '2024-03-01 18:46:00', 315.00, 11300, 10.80, 8),
-('Bahrain Grand Prix', 'McLaren', 'MCL38-01', 'Q3', '2024-03-01 18:46:05', 317.50, 11400, 10.20, 8),
-('Bahrain Grand Prix', 'Red Bull Racing', 'RB20-01', 'Race', '2024-03-02 16:10:00', 290.00, 10500, 85.00, 7),
-('Bahrain Grand Prix', 'Ferrari', 'SF24-01', 'Race', '2024-03-02 16:10:02', 288.50, 10450, 86.00, 7),
-('Bahrain Grand Prix', 'Mercedes', 'W15-01', 'Race', '2024-03-02 16:10:05', 285.00, 10300, 85.50, 7),
-('Bahrain Grand Prix', 'Aston Martin', 'AMR24-01', 'FP1', '2024-02-29 14:30:00', 300.00, 11000, 50.00, 8),
-('Bahrain Grand Prix', 'Alpine', 'A524-01', 'FP2', '2024-02-29 18:30:00', 305.00, 11100, 45.00, 8),
-('Bahrain Grand Prix', 'Williams', 'FW46-01', 'FP3', '2024-03-01 15:30:00', 310.00, 11200, 20.00, 8),
-
-('Saudi Arabian Grand Prix', 'Red Bull Racing', 'RB20-01', 'Q3', '2024-03-08 20:45:00', 335.50, 11800, 10.00, 8),
-('Saudi Arabian Grand Prix', 'Ferrari', 'SF24-01', 'Q3', '2024-03-08 20:45:05', 333.20, 11750, 10.50, 8),
-('Saudi Arabian Grand Prix', 'McLaren', 'MCL38-01', 'Q3', '2024-03-08 20:46:00', 330.00, 11600, 10.20, 8),
-('Saudi Arabian Grand Prix', 'Red Bull Racing', 'RB20-01', 'Race', '2024-03-09 20:10:00', 315.00, 10800, 90.00, 8),
-('Saudi Arabian Grand Prix', 'Ferrari', 'SF24-01', 'Race', '2024-03-09 20:10:02', 313.50, 10750, 91.00, 8),
-('Saudi Arabian Grand Prix', 'Mercedes', 'W15-01', 'Race', '2024-03-09 20:10:05', 310.00, 10600, 90.50, 8),
-('Saudi Arabian Grand Prix', 'Haas', 'VF24-01', 'FP1', '2024-03-07 16:30:00', 320.00, 11200, 60.00, 8),
-('Saudi Arabian Grand Prix', 'RB', 'VCARB01-01', 'FP2', '2024-03-07 20:30:00', 322.00, 11300, 55.00, 8),
-('Saudi Arabian Grand Prix', 'Kick Sauber', 'C44-01', 'FP3', '2024-03-08 16:30:00', 325.00, 11400, 30.00, 8),
-('Saudi Arabian Grand Prix', 'Andretti Global', 'AND24-01', 'Q1', '2024-03-08 20:10:00', 328.00, 11500, 15.00, 8),
-
-('Australian Grand Prix', 'Ferrari', 'SF24-01', 'Q3', '2024-03-23 16:45:00', 325.50, 11600, 10.00, 8),
-('Australian Grand Prix', 'McLaren', 'MCL38-01', 'Q3', '2024-03-23 16:45:05', 323.20, 11550, 10.50, 8),
-('Australian Grand Prix', 'Red Bull Racing', 'RB20-01', 'Q3', '2024-03-23 16:46:00', 320.00, 11400, 10.20, 8),
-('Australian Grand Prix', 'Ferrari', 'SF24-01', 'Race', '2024-03-24 15:10:00', 305.00, 10600, 95.00, 8),
-('Australian Grand Prix', 'McLaren', 'MCL38-01', 'Race', '2024-03-24 15:10:02', 303.50, 10550, 96.00, 8),
-('Australian Grand Prix', 'Red Bull Racing', 'RB20-01', 'Race', '2024-03-24 15:10:05', 300.00, 10400, 95.50, 8),
-('Australian Grand Prix', 'Aston Martin', 'AMR24-01', 'FP1', '2024-03-22 12:30:00', 310.00, 11000, 70.00, 8),
-('Australian Grand Prix', 'Alpine', 'A524-01', 'FP2', '2024-03-22 16:00:00', 312.00, 11100, 65.00, 8),
-('Australian Grand Prix', 'Williams', 'FW46-01', 'FP3', '2024-03-23 12:30:00', 315.00, 11200, 40.00, 8),
-('Australian Grand Prix', 'Haas', 'VF24-01', 'Q1', '2024-03-23 16:10:00', 318.00, 11300, 15.00, 8),
-
-('Japanese Grand Prix', 'Red Bull Racing', 'RB20-01', 'Q3', '2024-04-06 15:45:00', 315.50, 11400, 10.00, 8),
-('Japanese Grand Prix', 'Ferrari', 'SF24-01', 'Q3', '2024-04-06 15:45:05', 313.20, 11350, 10.50, 8),
-('Japanese Grand Prix', 'McLaren', 'MCL38-01', 'Q3', '2024-04-06 15:46:00', 310.00, 11200, 10.20, 8),
-('Japanese Grand Prix', 'Red Bull Racing', 'RB20-01', 'Race', '2024-04-07 14:10:00', 295.00, 10400, 90.00, 8),
-('Japanese Grand Prix', 'Ferrari', 'SF24-01', 'Race', '2024-04-07 14:10:02', 293.50, 10350, 91.00, 8),
-('Japanese Grand Prix', 'Mercedes', 'W15-01', 'Race', '2024-04-07 14:10:05', 290.00, 10200, 90.50, 8),
-('Japanese Grand Prix', 'RB', 'VCARB01-01', 'FP1', '2024-04-05 11:30:00', 300.00, 10800, 60.00, 8),
-('Japanese Grand Prix', 'Kick Sauber', 'C44-01', 'FP2', '2024-04-05 15:00:00', 302.00, 10900, 55.00, 8),
-('Japanese Grand Prix', 'Andretti Global', 'AND24-01', 'FP3', '2024-04-06 11:30:00', 305.00, 11000, 30.00, 8),
-('Japanese Grand Prix', 'Aston Martin', 'AMR24-01', 'Q1', '2024-04-06 15:10:00', 308.00, 11100, 15.00, 8),
-
-('Chinese Grand Prix', 'Red Bull Racing', 'RB20-01', 'Q3', '2024-04-20 15:45:00', 330.50, 11700, 10.00, 8),
-('Chinese Grand Prix', 'McLaren', 'MCL38-01', 'Q3', '2024-04-20 15:45:05', 328.20, 11650, 10.50, 8),
-('Chinese Grand Prix', 'Ferrari', 'SF24-01', 'Q3', '2024-04-20 15:46:00', 325.00, 11500, 10.20, 8),
-('Chinese Grand Prix', 'Red Bull Racing', 'RB20-01', 'Race', '2024-04-21 15:10:00', 310.00, 10700, 95.00, 8),
-('Chinese Grand Prix', 'McLaren', 'MCL38-01', 'Race', '2024-04-21 15:10:02', 308.50, 10650, 96.00, 8),
-('Chinese Grand Prix', 'Ferrari', 'SF24-01', 'Race', '2024-04-21 15:10:05', 305.00, 10500, 95.50, 8),
-('Chinese Grand Prix', 'Williams', 'FW46-01', 'Sprint', '2024-04-20 11:00:00', 315.00, 11000, 40.00, 8),
-('Chinese Grand Prix', 'Haas', 'VF24-01', 'Sprint', '2024-04-20 11:00:05', 312.00, 10900, 41.00, 8),
-('Chinese Grand Prix', 'Alpine', 'A524-01', 'FP1', '2024-04-19 11:30:00', 318.00, 11200, 70.00, 8),
-('Chinese Grand Prix', 'Andretti Global', 'AND24-02', 'Q1', '2024-04-20 15:10:00', 320.00, 11300, 15.00, 8);
+-- 9. RESULT_ (100 rows)
+-- Results for 10 GPs with 10 Drivers per GP
+INSERT INTO RESULT_ (Permanent_Number, Constructor_Name, GP_Name, Race_Finishing_Position, Championship_Points_Earned, Fastest_Lap_Time, Status) VALUES
+-- Australian GP
+(1, 'Red Bull', 'Australian GP', 1, 25, '1:19.813', 'Finished'),
+(11, 'Red Bull', 'Australian GP', 2, 18, '1:20.125', 'Finished'),
+(16, 'Ferrari', 'Australian GP', 3, 15, '1:20.005', 'Finished'),
+(55, 'Ferrari', 'Australian GP', 4, 12, '1:20.444', 'Finished'),
+(4, 'McLaren', 'Australian GP', 5, 10, '1:20.555', 'Finished'),
+(81, 'McLaren', 'Australian GP', 6, 8, '1:20.666', 'Finished'),
+(44, 'Mercedes', 'Australian GP', 7, 6, '1:20.777', 'Finished'),
+(63, 'Mercedes', 'Australian GP', 8, 4, '1:20.888', 'Finished'),
+(14, 'Aston Martin', 'Australian GP', 9, 2, '1:21.000', 'Finished'),
+(18, 'Aston Martin', 'Australian GP', 10, 1, '1:21.111', 'Finished'),
+-- Japanese GP
+(1, 'Red Bull', 'Japanese GP', 1, 26, '1:33.123', 'Finished'),
+(11, 'Red Bull', 'Japanese GP', 2, 18, '1:33.500', 'Finished'),
+(55, 'Ferrari', 'Japanese GP', 3, 15, '1:33.600', 'Finished'),
+(16, 'Ferrari', 'Japanese GP', 4, 12, '1:33.700', 'Finished'),
+(4, 'McLaren', 'Japanese GP', 5, 10, '1:33.800', 'Finished'),
+(14, 'Aston Martin', 'Japanese GP', 6, 8, '1:33.900', 'Finished'),
+(63, 'Mercedes', 'Japanese GP', 7, 6, '1:34.000', 'Finished'),
+(81, 'McLaren', 'Japanese GP', 8, 4, '1:34.100', 'Finished'),
+(44, 'Mercedes', 'Japanese GP', 9, 2, '1:34.200', 'Finished'),
+(22, 'RB', 'Japanese GP', 10, 1, '1:34.500', 'Finished'),
+-- Chinese GP
+(1, 'Red Bull', 'Chinese GP', 1, 25, '1:37.410', 'Finished'),
+(4, 'McLaren', 'Chinese GP', 2, 18, '1:38.100', 'Finished'),
+(11, 'Red Bull', 'Chinese GP', 3, 15, '1:38.200', 'Finished'),
+(16, 'Ferrari', 'Chinese GP', 4, 12, '1:38.300', 'Finished'),
+(55, 'Ferrari', 'Chinese GP', 5, 10, '1:38.400', 'Finished'),
+(63, 'Mercedes', 'Chinese GP', 6, 8, '1:38.500', 'Finished'),
+(14, 'Aston Martin', 'Chinese GP', 7, 6, '1:38.600', 'Finished'),
+(81, 'McLaren', 'Chinese GP', 8, 4, '1:38.700', 'Finished'),
+(44, 'Mercedes', 'Chinese GP', 9, 2, '1:38.800', 'Finished'),
+(27, 'Haas', 'Chinese GP', 10, 1, '1:39.000', 'Finished'),
+-- Miami GP
+(4, 'McLaren', 'Miami GP', 1, 25, '1:30.634', 'Finished'),
+(1, 'Red Bull', 'Miami GP', 2, 18, '1:30.800', 'Finished'),
+(16, 'Ferrari', 'Miami GP', 3, 15, '1:30.900', 'Finished'),
+(11, 'Red Bull', 'Miami GP', 4, 12, '1:31.000', 'Finished'),
+(55, 'Ferrari', 'Miami GP', 5, 10, '1:31.100', 'Finished'),
+(44, 'Mercedes', 'Miami GP', 6, 8, '1:31.200', 'Finished'),
+(63, 'Mercedes', 'Miami GP', 7, 6, '1:31.300', 'Finished'),
+(14, 'Aston Martin', 'Miami GP', 8, 4, '1:31.400', 'Finished'),
+(31, 'Alpine', 'Miami GP', 9, 2, '1:31.800', 'Finished'),
+(22, 'RB', 'Miami GP', 10, 1, '1:31.900', 'Finished'),
+-- Monaco GP
+(16, 'Ferrari', 'Monaco GP', 1, 25, '1:15.160', 'Finished'),
+(81, 'McLaren', 'Monaco GP', 2, 18, '1:15.500', 'Finished'),
+(55, 'Ferrari', 'Monaco GP', 3, 15, '1:15.600', 'Finished'),
+(4, 'McLaren', 'Monaco GP', 4, 12, '1:15.700', 'Finished'),
+(63, 'Mercedes', 'Monaco GP', 5, 10, '1:15.800', 'Finished'),
+(1, 'Red Bull', 'Monaco GP', 6, 8, '1:15.900', 'Finished'),
+(44, 'Mercedes', 'Monaco GP', 7, 7, '1:14.500', 'Finished'),
+(22, 'RB', 'Monaco GP', 8, 4, '1:16.000', 'Finished'),
+(23, 'Williams', 'Monaco GP', 9, 2, '1:16.200', 'Finished'),
+(10, 'Alpine', 'Monaco GP', 10, 1, '1:16.400', 'Finished'),
+-- Canadian GP
+(1, 'Red Bull', 'Canadian GP', 1, 25, '1:15.542', 'Finished'),
+(4, 'McLaren', 'Canadian GP', 2, 18, '1:15.700', 'Finished'),
+(63, 'Mercedes', 'Canadian GP', 3, 15, '1:15.800', 'Finished'),
+(44, 'Mercedes', 'Canadian GP', 4, 13, '1:14.800', 'Finished'),
+(81, 'McLaren', 'Canadian GP', 5, 10, '1:16.000', 'Finished'),
+(14, 'Aston Martin', 'Canadian GP', 6, 8, '1:16.200', 'Finished'),
+(18, 'Aston Martin', 'Canadian GP', 7, 6, '1:16.400', 'Finished'),
+(3, 'RB', 'Canadian GP', 8, 4, '1:16.600', 'Finished'),
+(22, 'RB', 'Canadian GP', 9, 2, '1:16.800', 'Finished'),
+(10, 'Alpine', 'Canadian GP', 10, 1, '1:17.000', 'Finished'),
+-- Spanish GP
+(1, 'Red Bull', 'Spanish GP', 1, 25, '1:17.333', 'Finished'),
+(4, 'McLaren', 'Spanish GP', 2, 19, '1:17.111', 'Finished'),
+(44, 'Mercedes', 'Spanish GP', 3, 15, '1:17.500', 'Finished'),
+(63, 'Mercedes', 'Spanish GP', 4, 12, '1:17.600', 'Finished'),
+(16, 'Ferrari', 'Spanish GP', 5, 10, '1:17.700', 'Finished'),
+(55, 'Ferrari', 'Spanish GP', 6, 8, '1:17.800', 'Finished'),
+(81, 'McLaren', 'Spanish GP', 7, 6, '1:17.900', 'Finished'),
+(11, 'Red Bull', 'Spanish GP', 8, 4, '1:18.000', 'Finished'),
+(10, 'Alpine', 'Spanish GP', 9, 2, '1:18.200', 'Finished'),
+(31, 'Alpine', 'Spanish GP', 10, 1, '1:18.400', 'Finished'),
+-- Austrian GP
+(63, 'Mercedes', 'Austrian GP', 1, 25, '1:07.900', 'Finished'),
+(81, 'McLaren', 'Austrian GP', 2, 18, '1:08.000', 'Finished'),
+(55, 'Ferrari', 'Austrian GP', 3, 15, '1:08.100', 'Finished'),
+(44, 'Mercedes', 'Austrian GP', 4, 12, '1:08.200', 'Finished'),
+(1, 'Red Bull', 'Austrian GP', 5, 10, '1:08.300', 'Finished'),
+(27, 'Haas', 'Austrian GP', 6, 8, '1:08.500', 'Finished'),
+(11, 'Red Bull', 'Austrian GP', 7, 6, '1:08.600', 'Finished'),
+(3, 'RB', 'Austrian GP', 8, 4, '1:08.700', 'Finished'),
+(10, 'Alpine', 'Austrian GP', 9, 2, '1:08.800', 'Finished'),
+(20, 'Haas', 'Austrian GP', 10, 1, '1:09.000', 'Finished'),
+-- British GP
+(44, 'Mercedes', 'British GP', 1, 25, '1:29.500', 'Finished'),
+(1, 'Red Bull', 'British GP', 2, 18, '1:29.600', 'Finished'),
+(4, 'McLaren', 'British GP', 3, 15, '1:29.700', 'Finished'),
+(81, 'McLaren', 'British GP', 4, 12, '1:29.800', 'Finished'),
+(55, 'Ferrari', 'British GP', 5, 11, '1:28.500', 'Finished'),
+(27, 'Haas', 'British GP', 6, 8, '1:30.000', 'Finished'),
+(18, 'Aston Martin', 'British GP', 7, 6, '1:30.200', 'Finished'),
+(14, 'Aston Martin', 'British GP', 8, 4, '1:30.400', 'Finished'),
+(23, 'Williams', 'British GP', 9, 2, '1:30.600', 'Finished'),
+(22, 'RB', 'British GP', 10, 1, '1:30.800', 'Finished'),
+-- Hungarian GP
+(81, 'McLaren', 'Hungarian GP', 1, 25, '1:21.000', 'Finished'),
+(4, 'McLaren', 'Hungarian GP', 2, 18, '1:21.100', 'Finished'),
+(44, 'Mercedes', 'Hungarian GP', 3, 15, '1:21.200', 'Finished'),
+(16, 'Ferrari', 'Hungarian GP', 4, 12, '1:21.300', 'Finished'),
+(1, 'Red Bull', 'Hungarian GP', 5, 10, '1:21.400', 'Finished'),
+(55, 'Ferrari', 'Hungarian GP', 6, 8, '1:21.500', 'Finished'),
+(11, 'Red Bull', 'Hungarian GP', 7, 6, '1:21.600', 'Finished'),
+(63, 'Mercedes', 'Hungarian GP', 8, 5, '1:20.500', 'Finished'),
+(22, 'RB', 'Hungarian GP', 9, 2, '1:22.000', 'Finished'),
+(18, 'Aston Martin', 'Hungarian GP', 10, 1, '1:22.200', 'Finished');
