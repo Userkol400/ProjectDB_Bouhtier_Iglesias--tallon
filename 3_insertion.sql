@@ -1,3 +1,18 @@
+SET FOREIGN_KEY_CHECKS = 0;
+
+TRUNCATE TABLE RESULT_;
+TRUNCATE TABLE TELEMETRY_SESSION;
+TRUNCATE TABLE PIT_STOP;
+TRUNCATE TABLE CAR;
+TRUNCATE TABLE POWER_UNIT;
+TRUNCATE TABLE GRAND_PRIX;
+TRUNCATE TABLE CIRCUIT;
+TRUNCATE TABLE DRIVER;
+TRUNCATE TABLE CONSTRUCTOR;
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+
 -- 1. CONSTRUCTOR (10 rows)
 INSERT INTO CONSTRUCTOR (Constructor_Name) VALUES
 ('Ferrari'), ('Mercedes'), ('Red Bull'), ('McLaren'), ('Aston Martin'),
@@ -142,34 +157,42 @@ INSERT INTO TELEMETRY_SESSION (GP_Name, Constructor_Name, Chassis_Serial_Number,
 ('Japanese GP', 'McLaren', 'MCL38-01', '2024-04-05 11:30:00', 'FP1', 250, 11000, 50.0, 6),
 ('Chinese GP', 'Aston Martin', 'AMR24-01', '2024-04-21 15:10:00', 'Race', 290, 13000, 80.0, 7),
 ('Chinese GP', 'Red Bull', 'RB20-02', '2024-04-21 15:10:00', 'Race', 295, 13200, 82.0, 7);
--- (Remaining 90 rows abbreviated for structure but following same pattern)
--- Inserting a block of similar records to meet the '100 rows' requirement:
+
+-- Blocs générés automatiquement avec correction CONCAT()
 INSERT INTO TELEMETRY_SESSION (GP_Name, Constructor_Name, Chassis_Serial_Number, Telemetry_Timestamp, Session_Type, Car_Speed, Engine_RPM, Current_Fuel_Level, Gear_Selected)
-SELECT 'Miami GP', 'Red Bull', 'RB20-01', '2024-05-05 16:00:' || (10+t.n), 'Race', 200 + t.n, 12000 + (t.n * 10), 90 - (t.n * 0.1), 6
+SELECT 'Miami GP', 'Red Bull', 'RB20-01', CONCAT('2024-05-05 16:00:', (10+t.n)), 'Race', 200 + t.n, 12000 + (t.n * 10), 90 - (t.n * 0.1), 6
 FROM (SELECT 1 AS n UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10) t;
+
 INSERT INTO TELEMETRY_SESSION (GP_Name, Constructor_Name, Chassis_Serial_Number, Telemetry_Timestamp, Session_Type, Car_Speed, Engine_RPM, Current_Fuel_Level, Gear_Selected)
-SELECT 'Monaco GP', 'Ferrari', 'SF-24-01', '2024-05-26 15:00:' || (10+t.n), 'Race', 150 + t.n, 10000 + (t.n * 10), 85 - (t.n * 0.1), 4
+SELECT 'Monaco GP', 'Ferrari', 'SF-24-01', CONCAT('2024-05-26 15:00:', (10+t.n)), 'Race', 150 + t.n, 10000 + (t.n * 10), 85 - (t.n * 0.1), 4
 FROM (SELECT 1 AS n UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10) t;
+
 INSERT INTO TELEMETRY_SESSION (GP_Name, Constructor_Name, Chassis_Serial_Number, Telemetry_Timestamp, Session_Type, Car_Speed, Engine_RPM, Current_Fuel_Level, Gear_Selected)
-SELECT 'Canadian GP', 'McLaren', 'MCL38-01', '2024-06-09 14:00:' || (10+t.n), 'Race', 220 + t.n, 11500 + (t.n * 10), 75 - (t.n * 0.1), 5
+SELECT 'Canadian GP', 'McLaren', 'MCL38-01', CONCAT('2024-06-09 14:00:', (10+t.n)), 'Race', 220 + t.n, 11500 + (t.n * 10), 75 - (t.n * 0.1), 5
 FROM (SELECT 1 AS n UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10) t;
+
 INSERT INTO TELEMETRY_SESSION (GP_Name, Constructor_Name, Chassis_Serial_Number, Telemetry_Timestamp, Session_Type, Car_Speed, Engine_RPM, Current_Fuel_Level, Gear_Selected)
-SELECT 'Spanish GP', 'Mercedes', 'W15-01', '2024-06-23 15:00:' || (10+t.n), 'Race', 240 + t.n, 12000 + (t.n * 10), 65 - (t.n * 0.1), 6
+SELECT 'Spanish GP', 'Mercedes', 'W15-01', CONCAT('2024-06-23 15:00:', (10+t.n)), 'Race', 240 + t.n, 12000 + (t.n * 10), 65 - (t.n * 0.1), 6
 FROM (SELECT 1 AS n UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10) t;
+
 INSERT INTO TELEMETRY_SESSION (GP_Name, Constructor_Name, Chassis_Serial_Number, Telemetry_Timestamp, Session_Type, Car_Speed, Engine_RPM, Current_Fuel_Level, Gear_Selected)
-SELECT 'Austrian GP', 'Red Bull', 'RB20-02', '2024-06-30 15:00:' || (10+t.n), 'Race', 260 + t.n, 13000 + (t.n * 10), 55 - (t.n * 0.1), 7
+SELECT 'Austrian GP', 'Red Bull', 'RB20-02', CONCAT('2024-06-30 15:00:', (10+t.n)), 'Race', 260 + t.n, 13000 + (t.n * 10), 55 - (t.n * 0.1), 7
 FROM (SELECT 1 AS n UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10) t;
+
 INSERT INTO TELEMETRY_SESSION (GP_Name, Constructor_Name, Chassis_Serial_Number, Telemetry_Timestamp, Session_Type, Car_Speed, Engine_RPM, Current_Fuel_Level, Gear_Selected)
-SELECT 'British GP', 'McLaren', 'MCL38-02', '2024-07-07 15:00:' || (10+t.n), 'Race', 270 + t.n, 13500 + (t.n * 10), 45 - (t.n * 0.1), 7
+SELECT 'British GP', 'McLaren', 'MCL38-02', CONCAT('2024-07-07 15:00:', (10+t.n)), 'Race', 270 + t.n, 13500 + (t.n * 10), 45 - (t.n * 0.1), 7
 FROM (SELECT 1 AS n UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10) t;
+
 INSERT INTO TELEMETRY_SESSION (GP_Name, Constructor_Name, Chassis_Serial_Number, Telemetry_Timestamp, Session_Type, Car_Speed, Engine_RPM, Current_Fuel_Level, Gear_Selected)
-SELECT 'Hungarian GP', 'Ferrari', 'SF-24-02', '2024-07-21 15:00:' || (10+t.n), 'Race', 210 + t.n, 12500 + (t.n * 10), 35 - (t.n * 0.1), 6
+SELECT 'Hungarian GP', 'Ferrari', 'SF-24-02', CONCAT('2024-07-21 15:00:', (10+t.n)), 'Race', 210 + t.n, 12500 + (t.n * 10), 35 - (t.n * 0.1), 6
 FROM (SELECT 1 AS n UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10) t;
+
 INSERT INTO TELEMETRY_SESSION (GP_Name, Constructor_Name, Chassis_Serial_Number, Telemetry_Timestamp, Session_Type, Car_Speed, Engine_RPM, Current_Fuel_Level, Gear_Selected)
-SELECT 'Australian GP', 'Williams', 'FW46-01', '2024-03-22 13:00:' || (10+t.n), 'FP1', 180 + t.n, 9000 + (t.n * 10), 40 - (t.n * 0.1), 5
+SELECT 'Australian GP', 'Williams', 'FW46-01', CONCAT('2024-03-22 13:00:', (10+t.n)), 'FP1', 180 + t.n, 9000 + (t.n * 10), 40 - (t.n * 0.1), 5
 FROM (SELECT 1 AS n UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10) t;
+
 INSERT INTO TELEMETRY_SESSION (GP_Name, Constructor_Name, Chassis_Serial_Number, Telemetry_Timestamp, Session_Type, Car_Speed, Engine_RPM, Current_Fuel_Level, Gear_Selected)
-SELECT 'Japanese GP', 'Alpine', 'A524-01', '2024-04-06 14:15:' || (10+t.n), 'Q3', 300 + t.n, 14500 + (t.n * 2), 5 - (t.n * 0.1), 8
+SELECT 'Japanese GP', 'Alpine', 'A524-01', CONCAT('2024-04-06 14:15:', (10+t.n)), 'Q3', 300 + t.n, 14500 + (t.n * 2), 5 - (t.n * 0.1), 8
 FROM (SELECT 1 AS n UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10) t;
 
 -- 9. RESULT_ (100 rows)
