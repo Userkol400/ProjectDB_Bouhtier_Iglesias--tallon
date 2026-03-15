@@ -18,7 +18,7 @@ WHERE Circuit_Name LIKE '%Silver%';
 
 /* Get results for drivers who finished or DNF */
 SELECT Permanent_Number, GP_Name, Race_Finishing_Position 
-FROM RESULT 
+FROM RESULT_ 
 WHERE Status IN ('Finished', 'DNF')
 ORDER BY Race_Finishing_Position;
 
@@ -39,14 +39,14 @@ HAVING AVG(Pit_Stop_Stationary_Duration) < 3.000;
 
 /* Count number of wins per driver */
 SELECT Permanent_Number, COUNT(Race_Finishing_Position) AS Total_Wins
-FROM RESULT
+FROM RESULT_
 WHERE Race_Finishing_Position = 1
 GROUP BY Permanent_Number
 HAVING COUNT(Race_Finishing_Position) > 0;
 
 /* Total points per constructor (only above 50 points) */
 SELECT Constructor_Name, SUM(Championship_Points_Earned) AS Total_Points
-FROM RESULT
+FROM RESULT_
 GROUP BY Constructor_Name
 HAVING SUM(Championship_Points_Earned) > 50;
 
@@ -74,7 +74,7 @@ INNER JOIN CIRCUIT C ON G.Circuit_Name = C.Circuit_Name;
 /* All drivers and their points (even with no results) */
 SELECT D.First_Name, D.Last_Name, R.GP_Name, R.Championship_Points_Earned
 FROM DRIVER D
-LEFT JOIN RESULT R ON D.Permanent_Number = R.Permanent_Number;
+LEFT JOIN RESULT_ R ON D.Permanent_Number = R.Permanent_Number;
 
 /* Car details linked to constructor and PU info */
 SELECT C.Constructor_Name, C.Chassis_Serial_Number, P.PU_Maximum_RPM
@@ -89,7 +89,7 @@ INNER JOIN GRAND_PRIX G ON P.GP_Name = G.GP_Name;
 
 /* Full race standings (Driver, Team, GP, Position) */
 SELECT D.Last_Name, R.Constructor_Name, R.GP_Name, R.Race_Finishing_Position
-FROM RESULT R
+FROM RESULT_ R
 INNER JOIN DRIVER D ON R.Permanent_Number = D.Permanent_Number
 ORDER BY R.GP_Name, R.Race_Finishing_Position;
 
@@ -100,7 +100,7 @@ ORDER BY R.GP_Name, R.Race_Finishing_Position;
 SELECT First_Name, Last_Name 
 FROM DRIVER 
 WHERE Permanent_Number IN (
-    SELECT Permanent_Number FROM RESULT WHERE Championship_Points_Earned > 0
+    SELECT Permanent_Number FROM RESULT_ WHERE Championship_Points_Earned > 0
 );
 
 /* Circuits that have no races scheduled yet */
