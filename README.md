@@ -115,6 +115,7 @@ image MCD looping :
 
 
 LDM from looping : 
+
 DRIVER = (Permanent_Number VARCHAR(50), First_Name VARCHAR(50), Last_Name VARCHAR(50), Nationality VARCHAR(50), Date_of_Birth VARCHAR(50), Total_Career_Podiums VARCHAR(50));
 CONSTRUCTOR = (Constructor_Name VARCHAR(50));
 CIRCUIT = (Circuit_Name VARCHAR(50), Circuit_Location VARCHAR(50), Circuit_Length VARCHAR(50));
@@ -128,168 +129,43 @@ RESULT_ = (#Permanent_Number, #Constructor_Name, #GP_Name, Race_Finishing_Positi
 
 Prompt Fourth Step :
 
-Act as an SQL database expert. Provide the insertion queries (INSERT INTO) used to populate my Formula 1 database.
+Provide the insertion queries used to populate the database, whose relational model is as follows:
 
-CREATE TABLE CIRCUIT (
-    Circuit_Name VARCHAR(100) PRIMARY KEY,
-    Circuit_Location VARCHAR(100) NOT NULL,
-    Circuit_Length DECIMAL(5,3) NOT NULL
-);
+CONSTRUCTOR (Constructor_Name(PK))
+DRIVER (Permanent_Number(PK), First_Name, Last_Name, Nationality, Date_of_Birth, Total_Career_Podiums)
+CIRCUIT (Circuit_Name(PK), Circuit_Location, Circuit_Length)
+POWER_UNIT (PU_ID(PK), PU_Current_Mileage, PU_Maximum_RPM)
+GRAND_PRIX (GP_Name(PK), GP_Date, Total_Race_Laps, #Circuit_Name)
+CAR (#Constructor_Name(PK), Chassis_Serial_Number(PK), #PU_ID)
+PIT_STOP (#Constructor_Name(PK), #Chassis_Serial_Number(PK), #GP_Name(PK), Pit_Stop_Lap_Number(PK), Pit_Stop_Stationary_Duration, Total_Pit_Lane_Duration, Tires_Fitted)
+TELEMETRY_SESSION (#GP_Name(PK), #Constructor_Name(PK), #Chassis_Serial_Number(PK), Telemetry_Timestamp(PK), Session_Type, Car_Speed, Engine_RPM, Current_Fuel_Level, Gear_Selected)
+RESULT_ (#Permanent_Number(PK), #Constructor_Name(PK), #GP_Name(PK), Race_Finishing_Position, Championship_Points_Earned, Fastest_Lap_Time, Status)
 
-CREATE TABLE CONSTRUCTOR (
-    Constructor_Name VARCHAR(100) PRIMARY KEY
-);
+Primary keys correspond to IDs and are marked with (PK). Foreign keys are identified by # and have the same name as the primary keys to which they refer.
 
-CREATE TABLE DRIVER (
-    Permanent_Number INT PRIMARY KEY,
-    First_Name VARCHAR(50) NOT NULL,
-    Last_Name VARCHAR(50) NOT NULL,
-    Nationality VARCHAR(50),
-    Date_of_Birth DATE,
-    Total_Career_Podiums INT DEFAULT 0
-);
+There must be a significant amount of data:
+- 10 rows for the CONSTRUCTOR table (use realistic F1 team names like Ferrari, Mercedes, Red Bull, etc.).
+- 20 rows for the DRIVER table (each driver assigned a unique permanent number). Make sure that the drivers' first and last names refer to various origins and nationalities.
+- 10 rows for the CIRCUIT table (real-world tracks).
+- 30 rows for the POWER_UNIT table.
+- 10 rows for the GRAND_PRIX table.
+- 20 rows for the CAR table (exactly 2 cars per Constructor).
+- At least 50 rows for PIT_STOP.
+- At least 100 rows for TELEMETRY_SESSION (mixing different Session_Types like 'FP1', 'Q3', 'Race').
+- At least 100 rows for RESULT_ (reflecting race outcomes for different drivers and constructors).
 
-CREATE TABLE POWER_UNIT (
-    PU_ID VARCHAR(50) PRIMARY KEY,
-    PU_Current_Mileage DECIMAL(8,2),
-    PU_Maximum_RPM INT
-);
+Foreign keys must refer to existing primary keys: provide the lines starting with filling in the tables in which there are no foreign keys (CONSTRUCTOR, DRIVER, CIRCUIT, POWER_UNIT), then the tables in which the foreign keys refer to primary keys in tables that have already been filled in.
 
-CREATE TABLE GRAND_PRIX (
-    GP_Name VARCHAR(100) PRIMARY KEY,
-    GP_Date DATE NOT NULL,
-    Total_Race_Laps INT NOT NULL,
-    Circuit_Name VARCHAR(100) NOT NULL,
-    FOREIGN KEY (Circuit_Name) REFERENCES CIRCUIT(Circuit_Name) 
-        ON DELETE CASCADE ON UPDATE CASCADE
-);
+The data must strictly comply with the following validation constraints:
+- DRIVER: Total_Career_Podiums >= 0, Permanent_Number > 0
+- CIRCUIT: Circuit_Length > 0
+- GRAND_PRIX: Total_Race_Laps > 0
+- POWER_UNIT: PU_Current_Mileage >= 0, PU_Maximum_RPM > 0 AND PU_Maximum_RPM <= 15000
+- PIT_STOP: Total_Pit_Lane_Duration >= Pit_Stop_Stationary_Duration, Tires_Fitted IN ('Soft', 'Medium', 'Hard', 'Intermediate', 'Wet'), Pit_Stop_Lap_Number > 0
+- TELEMETRY_SESSION: Gear_Selected BETWEEN -1 AND 8, Car_Speed >= 0
+- RESULT_: Championship_Points_Earned >= 0, Race_Finishing_Position > 0
 
-CREATE TABLE CAR (
-    Constructor_Name VARCHAR(100),
-    Chassis_Serial_Number VARCHAR(100),
-    PU_ID VARCHAR(50),
-    PRIMARY KEY (Constructor_Name, Chassis_Serial_Number),
-    FOREIGN KEY (Constructor_Name) REFERENCES CONSTRUCTOR(Constructor_Name) 
-        ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (PU_ID) REFERENCES POWER_UNIT(PU_ID) 
-        ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-CREATE TABLE RESULT (
-    Permanent_Number INT,
-    Constructor_Name VARCHAR(100),
-    GP_Name VARCHAR(100),
-    Race_Finishing_Position INT,
-    Championship_Points_Earned DECIMAL(4,1),
-    Fastest_Lap_Time VARCHAR(15),
-    Status VARCHAR(50),
-    PRIMARY KEY (Permanent_Number, Constructor_Name, GP_Name),
-    FOREIGN KEY (Permanent_Number) REFERENCES DRIVER(Permanent_Number) 
-        ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (Constructor_Name) REFERENCES CONSTRUCTOR(Constructor_Name) 
-        ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (GP_Name) REFERENCES GRAND_PRIX(GP_Name) 
-        ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-CREATE TABLE PIT_STOP (
-    Constructor_Name VARCHAR(100),
-    Chassis_Serial_Number VARCHAR(100),
-    GP_Name VARCHAR(100),
-    Pit_Stop_Lap_Number INT,
-    Pit_Stop_Stationary_Duration DECIMAL(5,3),
-    Total_Pit_Lane_Duration DECIMAL(6,3),
-    Tires_Fitted VARCHAR(20),
-    PRIMARY KEY (Constructor_Name, Chassis_Serial_Number, GP_Name, Pit_Stop_Lap_Number),
-    FOREIGN KEY (Constructor_Name, Chassis_Serial_Number) REFERENCES CAR(Constructor_Name, Chassis_Serial_Number) 
-        ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (GP_Name) REFERENCES GRAND_PRIX(GP_Name) 
-        ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-CREATE TABLE TELEMETRY_SESSION (
-    GP_Name VARCHAR(100),
-    Constructor_Name VARCHAR(100),
-    Chassis_Serial_Number VARCHAR(100),
-    Session_Type VARCHAR(50),
-    Telemetry_Timestamp TIMESTAMP,
-    Car_Speed DECIMAL(5,2),
-    Engine_RPM INT,
-    Current_Fuel_Level DECIMAL(5,2),
-    Gear_Selected INT,
-    PRIMARY KEY (GP_Name, Constructor_Name, Chassis_Serial_Number, Session_Type),
-    FOREIGN KEY (GP_Name) REFERENCES GRAND_PRIX(GP_Name) 
-        ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (Constructor_Name, Chassis_Serial_Number) REFERENCES CAR(Constructor_Name, Chassis_Serial_Number) 
-        ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-Primary keys correspond to IDs, unless otherwise specified. Foreign keys are identified by # and have the same name as the primary keys to which they refer.
-Foreign keys must refer to existing primary keys: provide the insert statements in the correct order (first the tables without foreign keys, then the tables in which the foreign keys refer to primary keys in tables that have already been filled in).
-
-CONSTRUCTOR: 11 rows (the 11 official F1 constructors).
-
-DRIVER: 22 rows (the 22 official starting drivers).
-
-CIRCUIT: 24 rows (24 well-known circuits).
-
-GRAND_PRIX: 24 rows (1 per circuit).
-
-POWER_UNIT: 22 rows.
-
-CAR: 22 rows (2 cars per constructor).
-
-RESULT: 528 rows (the 22 drivers participating in the 24 Grands Prix).
-
-PIT_STOP: 50 rows (several pit stops distributed across the races).
-
-TELEMETRY_SESSION: 50 rows (various speed/RPM readings during the races).
-
-The data must be realistic (using real F1 drivers, teams, and circuits) and must comply with the following validation constraints:
-ALTER TABLE RESULT 
-ADD CONSTRAINT chk_fastest_lap_format 
-CHECK (Fastest_Lap_Time LIKE '_:__.__' OR Fastest_Lap_Time LIKE '__:__.__');
-
-ALTER TABLE TELEMETRY_SESSION 
-ADD CONSTRAINT chk_session_type 
-CHECK (Session_Type IN ('FP1', 'FP2', 'FP3', 'Q1', 'Q2', 'Q3', 'Sprint', 'Race'));
-
--
-ALTER TABLE PIT_STOP 
-ADD CONSTRAINT chk_tires_fitted 
-CHECK (Tires_Fitted IN ('Soft', 'Medium', 'Hard', 'Intermediate', 'Wet'));
-
-
-ALTER TABLE RESULT 
-ADD CONSTRAINT chk_race_status 
-CHECK (Status IN ('Finished', 'DNF', 'DSQ', 'DNS'));
-
-
-ALTER TABLE DRIVER 
-ADD CONSTRAINT chk_driver_number 
-CHECK (Permanent_Number BETWEEN 1 AND 99);
-
-ALTER TABLE TELEMETRY_SESSION 
-ADD CONSTRAINT chk_gear_selected 
-CHECK (Gear_Selected BETWEEN 0 AND 8);
-
-ALTER TABLE RESULT 
-ADD CONSTRAINT chk_positive_points 
-CHECK (Championship_Points_Earned >= 0);
-
-ALTER TABLE DRIVER 
-ADD CONSTRAINT chk_positive_podiums 
-CHECK (Total_Career_Podiums >= 0);
-
-ALTER TABLE POWER_UNIT 
-ADD CONSTRAINT chk_positive_mileage 
-CHECK (PU_Current_Mileage >= 0);
-
-ALTER TABLE PIT_STOP 
-ADD CONSTRAINT chk_pit_stop_logic 
-CHECK (Total_Pit_Lane_Duration > Pit_Stop_Stationary_Duration);
-
-Provide the set in the form of an SQL script ready to be executed and saved as 3_insertion.sql
+Provide the set in the form of an SQL script ready to be executed, grouped by table. Do not insert any markdown formatting other than the final code block.
 
 
 Step V : usage scenario :
